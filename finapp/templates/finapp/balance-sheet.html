@@ -1,0 +1,43 @@
+{% extends 'finapp/base.html' %}
+{% block title %}Balance Sheet{% endblock %}
+{% block content %}
+<form method='POST' nonvalidate>
+    {% csrf_token %}
+
+    <h1>GENERAL LEDGER</h1>
+
+<table class="table">
+  <tr>
+    <th>Account</th>
+    <th>Currency</th>
+    <th>Amount</th>
+
+  </tr>
+  {% for entry in journal_entries %}
+  <tr>
+    
+    <td>{{ entry.acc_desc_dr }}</td>
+    <td>{{ entry.ccy_code }}</td>
+    <td>{{ entry.amount_dr }}</td>
+
+    
+  </tr>
+  {% endfor %}
+
+{% for entry in journal_entries %}
+   <tr>
+    
+    <td>{{ entry.acc_desc_cr }}</td>
+    <td>{{ entry.ccy_code }}</td>
+    <td>{{ entry.amount_cr }}</td>
+    
+  </tr>
+  {% endfor %}
+
+
+</table> 
+
+   
+
+</form>
+{% endblock %}

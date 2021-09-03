@@ -1,0 +1,44 @@
+{% extends 'finapp/base.html' %}
+{% block title %}Book Entries{% endblock %}
+{% block content %}
+<form method='POST' nonvalidate>
+    {% csrf_token %}
+    <h1>Book Entries</h1>
+    <a class="w3-left w3-btn" href="">❮ Home</a>
+            <br><br>
+            <label for="id_acc_desc_dr">Account Dr:</label>
+             <select name="acc_desc_dr" class="form-control" required="">
+                <option value="" selected="">------</option>
+                {% for acc_dr in acc_debit %}
+                <option value="{{ acc_dr }}">{{ acc_dr }} - {{ acc_dr.eqtn }}</option>
+                {% endfor %}
+            </select>
+            <br>
+        <label for="id_acc_desc_cr">Account Cr:</label>
+            <select name="acc_desc_cr" class="form-control" required="">
+                <option value="" selected="">------</option>
+                {% for acc_dr in acc_debit %}
+                <option value="{{ acc_dr }}">{{ acc_dr }} - {{ acc_dr.eqtn }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            
+        
+            <select name="ccy_code" class="form-control" required="">
+                {% for cy in acc_ccy %}
+                <option value="{{ cy }}">{{ cy.ccy_desc }} - {{cy}}</option>
+                {% endfor %}
+            </select>
+            <br>
+        
+            <input type="number" name="amount_dr" class="form-control" placeholder="Amount Dr" required="" autocomplete="off">
+            <br>
+        
+            <input type="number" name="amount_cr" class="form-control" placeholder="Amount Cr" required="" autocomplete="off">
+            <br>
+
+    <div class="form-group mb-1">
+        <button type="submit" class="form-control btn btn-primary">Record Transaction</button>
+    </div>
+</form>
+{% endblock %}
